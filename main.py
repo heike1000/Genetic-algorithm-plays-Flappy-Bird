@@ -8,9 +8,6 @@ AI = 1
 screen = pygame.display.set_mode((288, 512))
 background = pygame.image.load("./assets/background.png")
 pygame.display.set_caption("Flappy Bird")
-bgm = pygame.mixer.Sound('sound/bgm.wav')
-channel_1 = pygame.mixer.Channel(1)
-channel_1.play(bgm)
 
 
 class Bird(pygame.sprite.Sprite):
