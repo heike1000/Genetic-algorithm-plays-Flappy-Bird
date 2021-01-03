@@ -1,7 +1,6 @@
 import random
 import sys
 import pygame
-import numpy as np
 import function
 
 pygame.init()
