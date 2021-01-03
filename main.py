@@ -53,7 +53,7 @@ class Bird(pygame.sprite.Sprite):
         resultU = self.rect.colliderect(newWall.wallUpRect)
         resultD = self.rect.colliderect(newWall.wallDownRect)
 
-        if resultU or resultD or newBird.rect.bottom >= ground.rect.top or newBird.birdY < -500:
+        if resultU or resultD or newBird.rect.bottom >= ground.rect.top or newBird.birdY < -400:
             score.append(time - (environment[0] ** 2 + environment[1] ** 2) ** 0.5 + point * 200)
             hit = pygame.mixer.Sound('sound/hit.wav')
             channel_3 = pygame.mixer.Channel(2)
