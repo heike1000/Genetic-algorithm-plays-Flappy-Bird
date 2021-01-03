@@ -14,11 +14,6 @@ channel_1 = pygame.mixer.Channel(1)
 channel_1.play(bgm)
 
 
-def Sigmod(x):
-    y = 1 / (1 + np.exp(-x))
-    return y
-
-
 class Bird(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -64,7 +59,7 @@ class Bird(pygame.sprite.Sprite):
             time = 0
             point = 0
             if Code == 20:
-                #杂交，变异
+                # 杂交，变异
                 rank = sorted(list(zip(score, populations)))[::-1]
                 print("该轮最高得分：" + str(rank[0][0]))
                 father = rank[0:10]
@@ -133,9 +128,9 @@ class Ground():
         self.rect.left = -30
 
 
-epoch = 0#已经进行的轮数
-time = 0#存活时间
-point = 0#得分
+epoch = 0  # 已经进行的轮数
+time = 0  # 存活时间
+point = 0  # 得分
 coolText = Text(point)
 newBird = Bird()
 newWall = Wall()
