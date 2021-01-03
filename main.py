@@ -3,6 +3,7 @@ import sys
 import pygame
 import numpy as np
 import function
+
 pygame.init()
 AI = 1
 screen = pygame.display.set_mode((288, 512))
@@ -11,6 +12,7 @@ pygame.display.set_caption("Flappy Bird")
 bgm = pygame.mixer.Sound('sound/bgm.wav')
 channel_1 = pygame.mixer.Channel(1)
 channel_1.play(bgm)
+
 
 def Sigmod(x):
     y = 1 / (1 + np.exp(-x))
@@ -51,17 +53,19 @@ class Bird(pygame.sprite.Sprite):
         resultU = self.rect.colliderect(newWall.wallUpRect)
         resultD = self.rect.colliderect(newWall.wallDownRect)
 
-        if resultU or resultD or newBird.rect.bottom >= ground.rect.top or newBird.birdY<-500:
-            score.append(time-(environment[0]**2 + environment[1]**2)**0.5+point*200)
+        if resultU or resultD or newBird.rect.bottom >= ground.rect.top or newBird.birdY < -500:
+            score.append(time - (environment[0] ** 2 + environment[1] ** 2) ** 0.5 + point * 200)
             hit = pygame.mixer.Sound('sound/hit.wav')
             channel_3 = pygame.mixer.Channel(2)
             channel_3.play(hit)
-            print("第%s轮第%s号个体得分：" % (epoch,Code) + str(time - (environment[0] ** 2 + environment[1] ** 2) ** 0.5 + point * 200))
-            Code+=1
+            print("第%s轮第%s号个体得分：" % (epoch, Code) + str(
+                time - (environment[0] ** 2 + environment[1] ** 2) ** 0.5 + point * 200))
+            Code += 1
             time = 0
             point = 0
             if Code == 20:
-                rank = sorted(list(zip(score,populations)))[::-1]
+                #杂交，变异
+                rank = sorted(list(zip(score, populations)))[::-1]
                 print("该轮最高得分：" + str(rank[0][0]))
                 father = rank[0:10]
                 mother = rank[0:10]
@@ -71,12 +75,10 @@ class Bird(pygame.sprite.Sprite):
                 score = []
                 epoch += 1
                 for i in range(10):
-                    populations.append(function.Variation(function.Crossover(father[i][1],mother[i][1])))
+                    populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
 
             keep_going = False
-
-
 
 
 class Wall():
@@ -107,19 +109,20 @@ class Wall():
             self.wallUpY = 360 + self.gap - self.offset
             self.wallDownY = 0 - self.gap - self.offset
 
+
 class Text():
 
-    def __init__(self,content):
-        red=(100,50,50)
-        self.color=red
-        self.font=pygame.font.SysFont(None,52)
+    def __init__(self, content):
+        red = (100, 50, 50)
+        self.color = red
+        self.font = pygame.font.SysFont(None, 52)
 
-        contentStr=str(content)
-        self.image=self.font.render(contentStr,True,self.color)
+        contentStr = str(content)
+        self.image = self.font.render(contentStr, True, self.color)
 
-    def updateText(self,content):
-        contentStr=str(content)
-        self.image=self.font.render(contentStr,True,self.color)
+    def updateText(self, content):
+        contentStr = str(content)
+        self.image = self.font.render(contentStr, True, self.color)
 
 
 class Ground():
@@ -128,10 +131,12 @@ class Ground():
         self.rect = self.image.get_rect()
         self.rect.bottom = 560
         self.rect.left = -30
-epoch = 0
-time = 0
-point = 0
-coolText=Text(point)
+
+
+epoch = 0#已经进行的轮数
+time = 0#存活时间
+point = 0#得分
+coolText = Text(point)
 newBird = Bird()
 newWall = Wall()
 keep_going = True
@@ -145,11 +150,11 @@ for i in range(20):
 Code = 0
 while True:
     environment = [newBird.birdX - newWall.wallx,
-                    newBird.birdY - (newWall.wallUpY+newWall.wallDownY)/2,
-                    newBird.jumpSpeed*20]
+                   newBird.birdY - (newWall.wallUpY + newWall.wallDownY) / 2,
+                   newBird.jumpSpeed * 20]
     possibilty = function.Predict(populations[Code], environment)
 
-    if possibilty >=0.5:
+    if possibilty >= 0.5:
         action = 1
     else:
         action = 0
@@ -187,9 +192,8 @@ while True:
         newWall = Wall()
         keep_going = True
     pygame.display.update()
-    if point>=10:
+    if point >= 10:
         clock.tick(60)
     else:
         clock.tick(300)
     time = time + 1
-
