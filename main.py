@@ -5,7 +5,7 @@ import function
 
 pygame.init()
 AI = 1
-screen = pygame.display.set_mode((288, 512))
+screen = pygame.display.set_mode((288, 512))  # 288 512
 background = pygame.image.load("./assets/background.png")
 pygame.display.set_caption("Flappy Bird")
 
@@ -65,7 +65,9 @@ class Bird(pygame.sprite.Sprite):
                 Code = 0
                 score = []
                 epoch += 1
-                for i in range(10):
+                populations.append(father[0][1])
+                populations.append(function.Variation(father[0][1]))
+                for i in range(9):
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
 
@@ -78,7 +80,7 @@ class Wall():
         self.wallDown = pygame.image.load("assets/top.png")
         self.wallUpRect = self.wallUp.get_rect()
         self.wallDownRect = self.wallDown.get_rect()
-        self.gap = 35  # 缝隙间隔
+        self.gap = 30  # 缝隙间隔
         self.wallx = 288
         self.offset = 0
 
@@ -94,7 +96,7 @@ class Wall():
         self.wallUpRect.center = (self.wallx, self.wallUpY)
         self.wallDownRect.center = (self.wallx, self.wallDownY)
 
-        if self.wallx < -0:
+        if self.wallx < -20:
             self.wallx = 288
             self.offset = random.randint(-80, 80)
             self.wallUpY = 360 + self.gap - self.offset
@@ -135,7 +137,6 @@ clock = pygame.time.Clock()
 ground = Ground()
 populations = []
 score = []
-
 for i in range(20):
     populations.append(function.Generate_chromosome())
 Code = 0
@@ -158,7 +159,7 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN and AI == 0:
-            newBird.jumpSpeed = 4
+            newBird.jumpSpeed = 3
             channel_2 = pygame.mixer.Channel(3)
             fly = pygame.mixer.Sound('sound/fly.WAV')
             channel_2.play(fly)
@@ -183,7 +184,7 @@ while True:
         newWall = Wall()
         keep_going = True
     pygame.display.update()
-    if point >= 10:
+    if point >= 10 or AI != 1:
         clock.tick(60)
     else:
         clock.tick(300)
