@@ -65,9 +65,7 @@ class Bird(pygame.sprite.Sprite):
                 Code = 0
                 score = []
                 epoch += 1
-                populations.append(father[0][1])
-                populations.append(function.Variation(father[0][1]))
-                for i in range(9):
+                for i in range(10):
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
 
