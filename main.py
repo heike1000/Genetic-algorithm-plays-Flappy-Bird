@@ -46,7 +46,7 @@ class Bird(pygame.sprite.Sprite):
 
         if resultU or resultD or newBird.rect.bottom >= ground.rect.top or newBird.birdY < -400:
             score.append(time - (environment[0] ** 2 + environment[1] ** 2) ** 0.5 + point * 200)
-            hit = pygame.mixer.Sound('sound/hit.wav')
+            hit = pygame.mixer.Sound('sound/hit.WAV')
             channel_3 = pygame.mixer.Channel(2)
             channel_3.play(hit)
             print("第%s轮第%s号个体得分：" % (epoch, Code) + str(
