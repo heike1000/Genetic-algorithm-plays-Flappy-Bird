@@ -54,6 +54,7 @@ class Bird(pygame.sprite.Sprite):
             Code += 1
             time = 0
             point = 0
+            # 一轮20只鸟
             if Code == 20:
                 # 杂交，变异
                 rank = sorted(list(zip(score, populations)))[::-1]
@@ -139,15 +140,16 @@ for i in range(20):
     populations.append(function.Generate_chromosome())
 Code = 0
 while True:
+    # 感知环境并作出决策
     environment = [newBird.birdX - newWall.wallx,
                    newBird.birdY - (newWall.wallUpY + newWall.wallDownY) / 2,
                    newBird.jumpSpeed * 20]
     possibilty = function.Predict(populations[Code], environment)
-
     if possibilty >= 0.5:
         action = 1
     else:
         action = 0
+
     if newBird.rect.top > ground.rect.top:
         newBird.rect.centery = ground.rect.top
     else:
