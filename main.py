@@ -140,7 +140,7 @@ for i in range(20):
 Code = 0
 while True:
     environment = [newBird.birdX - newWall.wallx,
-                   newBird.birdY - (newWall.wallUpY + newWall.wallDownY + 30) / 2,
+                   newBird.birdY - (newWall.wallUpY + newWall.wallDownY) / 2,
                    newBird.jumpSpeed * 20]
     possibilty = function.Predict(populations[Code], environment)
 

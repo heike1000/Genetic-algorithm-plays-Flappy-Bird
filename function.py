@@ -5,7 +5,7 @@ import numpy as np
 def Generate_chromosome():
     chromosome = []
     for i in range(4):
-        chromosome.append(random.randint(-200, 200) + random.random())
+        chromosome.append(random.randint(-250, 250) + random.random())
     return chromosome
 
 #杂交
@@ -26,11 +26,11 @@ def Crossover(chromosome1, chromosome2):
 def Variation(chromosome):
     chromosome_new = chromosome
     pick = random.randint(0, 3)
-    chromosome_new[pick] += (random.randint(-200, 200) + random.random()) * 0.1
-    if chromosome_new[pick] >= 201:
-        chromosome_new[pick] = 201
-    elif chromosome_new[pick] <= -199:
-        chromosome_new[pick] = -199
+    chromosome_new[pick] += (random.randint(-250, 250) + random.random()) * 0.1
+    if chromosome_new[pick] >= 251:
+        chromosome_new[pick] = 251
+    elif chromosome_new[pick] <= -251:
+        chromosome_new[pick] = -251
     return chromosome_new
 
 #按照环境和模型做出预测
