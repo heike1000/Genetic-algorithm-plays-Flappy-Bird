@@ -59,6 +59,7 @@ class Bird(pygame.sprite.Sprite):
                 # 杂交，变异
                 rank = sorted(list(zip(score, populations)))[::-1]
                 print("该轮最高得分：" + str(rank[0][0]))
+                print(rank[0][1])
                 father = rank[0:10]
                 mother = rank[0:10]
                 random.shuffle(mother)
@@ -179,13 +180,10 @@ while True:
     if keep_going:
         newBird.birdCrush()
         coolText.updateText(point)
-    else:
+    elif keep_going == False:
         newBird = Bird()
         newWall = Wall()
         keep_going = True
     pygame.display.update()
-    if point >= 10 or AI != 1:
-        clock.tick(60)
-    else:
-        clock.tick(300)
+    clock.tick(300)
     time = time + 1
