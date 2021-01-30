@@ -29,7 +29,7 @@ def Crossover(chromosome1, chromosome2):
 def Variation(chromosome):
     chromosome_new = chromosome
     pick = random.randint(0, 3)
-    chromosome_new[pick] += (random.randint(-250, 250) + random.random()) * 0.1
+    chromosome_new[pick] += (random.randint(-250, 250) + random.random()) * 0.05
     if chromosome_new[pick] >= 251:
         chromosome_new[pick] = 251
     elif chromosome_new[pick] <= -251:
@@ -39,6 +39,5 @@ def Variation(chromosome):
 
 # 按照环境和模型做出预测
 def Predict(chromosome, environment):
-    result = environment[0] * chromosome[0] + environment[1] * chromosome[1] + environment[2] * chromosome[2] + \
-             chromosome[3]
+    result = environment[0] * chromosome[0] + environment[1] * chromosome[1] + environment[2] * chromosome[2] + chromosome[3]
     return 0.5 * (1 + np.tanh(result) * 0.5)

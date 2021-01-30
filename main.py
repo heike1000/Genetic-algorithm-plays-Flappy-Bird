@@ -54,8 +54,8 @@ class Bird(pygame.sprite.Sprite):
             Code += 1
             time = 0
             point = 0
-            # 一轮20只鸟
-            if Code == 20:
+            # 一轮Code只鸟
+            if Code == 10:
                 # 杂交，变异
                 rank = sorted(list(zip(score, populations)))[::-1]
                 print("该轮最高得分：" + str(rank[0][0]))
@@ -66,7 +66,7 @@ class Bird(pygame.sprite.Sprite):
                 Code = 0
                 score = []
                 epoch += 1
-                for i in range(10):
+                for i in range(5):
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
 
