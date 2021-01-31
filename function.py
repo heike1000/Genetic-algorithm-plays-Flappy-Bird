@@ -5,10 +5,10 @@ import numpy as np
 # 生成染色体
 def Generate_chromosome():
     chromosome = []
-    chromosome.append(random.randint(-80, 80) + random.random())
-    chromosome.append(random.randint(-280, 30) + random.random())
-    chromosome.append(random.randint(-80, 80) + random.random())
-    chromosome.append(random.randint(-30, 130) + random.random())
+    chromosome.append(random.randint(-100, 100) + random.random())
+    chromosome.append(random.randint(-300, 50) + random.random())
+    chromosome.append(random.randint(-100, 100) + random.random())
+    chromosome.append(random.randint(-50, 150) + random.random())
     return chromosome
 
 
@@ -32,25 +32,25 @@ def Variation(chromosome):
     pick = random.randint(0, 3)
     chromosome_new[pick] += random.randint(-10, 10) + random.random()
     if pick == 0:
-        if chromosome_new[pick] >= 51:
-            chromosome_new[pick] = 50
-        elif chromosome_new[pick] <= -51:
-            chromosome_new[pick] = -50
-    elif pick == 1:
-        if chromosome_new[pick] >= 0:
-            chromosome_new[pick] = -1
-        elif chromosome_new[pick] <= -251:
-            chromosome_new[pick] = -250
-    elif pick == 2:
-        if chromosome_new[pick] >= 51:
-            chromosome_new[pick] = 50
-        elif chromosome_new[pick] <= -51:
-            chromosome_new[pick] = -50
-    else:
         if chromosome_new[pick] >= 101:
             chromosome_new[pick] = 100
-        elif chromosome_new[pick] <= 0:
-            chromosome_new[pick] = 1
+        elif chromosome_new[pick] <= -101:
+            chromosome_new[pick] = -100
+    elif pick == 1:
+        if chromosome_new[pick] >= 51:
+            chromosome_new[pick] = 50
+        elif chromosome_new[pick] <= -301:
+            chromosome_new[pick] = -300
+    elif pick == 2:
+        if chromosome_new[pick] >= 101:
+            chromosome_new[pick] = 100
+        elif chromosome_new[pick] <= -101:
+            chromosome_new[pick] = -100
+    else:
+        if chromosome_new[pick] >= 151:
+            chromosome_new[pick] = 150
+        elif chromosome_new[pick] <= -51:
+            chromosome_new[pick] = -50
     return chromosome_new
 
 
