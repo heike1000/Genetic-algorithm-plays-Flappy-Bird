@@ -3,12 +3,11 @@ import sys
 import pygame
 import function
 
+AI = 1#使用AI进行游戏
 pygame.init()
-AI = 1
 screen = pygame.display.set_mode((288, 512))  # 288 512
 background = pygame.image.load("./assets/background.png")
 pygame.display.set_caption("Flappy Bird")
-
 
 class Bird(pygame.sprite.Sprite):
     def __init__(self):
@@ -70,9 +69,7 @@ class Bird(pygame.sprite.Sprite):
                 for i in range(5):
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
                     populations.append(function.Variation(function.Crossover(father[i][1], mother[i][1])))
-
             keep_going = False
-
 
 class Wall():
     def __init__(self):
@@ -83,16 +80,13 @@ class Wall():
         self.gap = 30  # 缝隙间隔
         self.wallx = 288
         self.offset = 0
-
         self.wallUpY = 360 + self.gap - self.offset
         self.wallDownY = 0 - self.gap - self.offset
-
         self.wallUpRect.center = (self.wallx, self.wallUpY)
         self.wallDownRect.center = (self.wallx, self.wallDownY)
 
     def wallUpdate(self):
         self.wallx -= 1
-
         self.wallUpRect.center = (self.wallx, self.wallUpY)
         self.wallDownRect.center = (self.wallx, self.wallDownY)
 
@@ -102,14 +96,12 @@ class Wall():
             self.wallUpY = 360 + self.gap - self.offset
             self.wallDownY = 0 - self.gap - self.offset
 
-
 class Text():
 
     def __init__(self, content):
         red = (100, 50, 50)
         self.color = red
         self.font = pygame.font.SysFont(None, 52)
-
         contentStr = str(content)
         self.image = self.font.render(contentStr, True, self.color)
 
@@ -117,14 +109,12 @@ class Text():
         contentStr = str(content)
         self.image = self.font.render(contentStr, True, self.color)
 
-
 class Ground():
     def __init__(self):
         self.image = pygame.image.load("assets/ground.png")
         self.rect = self.image.get_rect()
         self.rect.bottom = 560
         self.rect.left = -30
-
 
 epoch = 0  # 已经进行的轮数
 time = 0  # 存活时间
@@ -135,11 +125,13 @@ newWall = Wall()
 keep_going = True
 clock = pygame.time.Clock()
 ground = Ground()
+
 populations = []
 score = []
 for i in range(20):
     populations.append(function.Generate_chromosome())
 Code = 0
+
 while True:
     # 感知环境并作出决策
     environment = [newBird.birdX - newWall.wallx,
@@ -150,7 +142,6 @@ while True:
         action = 1
     else:
         action = 0
-
     if newBird.rect.top > ground.rect.top:
         newBird.rect.centery = ground.rect.top
     else:

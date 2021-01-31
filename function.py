@@ -1,16 +1,14 @@
 import random
 import numpy as np
 
-
 # 生成染色体
 def Generate_chromosome():
     chromosome = []
     chromosome.append(random.randint(-100, 100) + random.random())
     chromosome.append(random.randint(-300, 50) + random.random())
     chromosome.append(random.randint(-100, 100) + random.random())
-    chromosome.append(random.randint(-50, 150) + random.random())
+    chromosome.append(random.randint(-130, 150) + random.random())
     return chromosome
-
 
 # 杂交
 def Crossover(chromosome1, chromosome2):
@@ -30,7 +28,7 @@ def Crossover(chromosome1, chromosome2):
 def Variation(chromosome):
     chromosome_new = chromosome
     pick = random.randint(0, 3)
-    chromosome_new[pick] += random.randint(-10, 10) + random.random()
+    chromosome_new[pick] += random.randint(-20, 20) + random.random()
     if pick == 0:
         if chromosome_new[pick] >= 101:
             chromosome_new[pick] = 100
@@ -49,10 +47,9 @@ def Variation(chromosome):
     else:
         if chromosome_new[pick] >= 151:
             chromosome_new[pick] = 150
-        elif chromosome_new[pick] <= -51:
-            chromosome_new[pick] = -50
+        elif chromosome_new[pick] <= -131:
+            chromosome_new[pick] = -130
     return chromosome_new
-
 
 # 按照环境和模型做出预测
 def Predict(chromosome, environment):
